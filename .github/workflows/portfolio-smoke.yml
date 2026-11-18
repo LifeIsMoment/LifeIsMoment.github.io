@@ -4,6 +4,12 @@ on:
     branches: [master]
     paths:
       - 'index.html'
+      - 'notes/**'
+      - 'content/notes/**'
+      - 'resources.html'
+      - 'cv.html'
+      - 'assets/bib/**'
+      - 'sitemap.xml'
       - '*.html'
       - 'assets/css/jy-site.css'
       - 'assets/js/jy-site.js'
