@@ -1,0 +1,40 @@
+
+name: Astro Academic Build Validation
+
+on:
+  push:
+    branches:
+      - feature/astro-academic-20261118
+    paths:
+      - 'research-site/**'
+      - 'content/notes/**'
+      - '.github/workflows/astro-verify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Astro dependencies
+        run: npm install --no-audit --no-fund
+        working-directory: research-site
+      - name: Build Astro and MDX site
+        run: npm run build
+        working-directory: research-site
+      - name: Check generated routes and research statuses
+        run: npm run verify
+        working-directory: research-site
+      - name: Preserve built site for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-research-preview
+          path: research-site/dist
+          retention-days: 7

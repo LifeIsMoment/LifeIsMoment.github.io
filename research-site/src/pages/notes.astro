@@ -1,0 +1,18 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import { getCollection } from 'astro:content';
+const notes=(await getCollection('notes')).sort((a,b)=>b.data.date.getTime()-a.data.date.getTime());
+---
+<Base title="Research Notes" pathname="/notes.html">
+ <Head label="Research notes & technical writing" title="연구 노트" description="산업용 AI와 소프트웨어 검증의 연구 질문, 실험 방법과 해석의 한계를 설명합니다."/>
+ <div class="container"><section class="section" style="padding-top:37px"><div class="note-grid">
+   {notes.map(entry=><article class="note-preview">
+     <div class="category">{entry.data.category}</div>
+     <h3><a href={'/notes/'+entry.id+'.html'}>{entry.data.title}</a></h3>
+     <p>{entry.data.description}</p>
+     <div class="date">{entry.data.date.toISOString().slice(0,10)} · {entry.data.status}</div>
+   </article>)}
+ </div><div class="notice" style="margin-top:35px">연구 노트는 논문 투고·게재 결과와 구분됩니다. 기초 자료와 실험조건에 따라 설명의 적용 범위가 달라질 수 있습니다.</div></section></div>
+</Base>

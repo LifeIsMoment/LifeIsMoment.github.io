@@ -1,0 +1,24 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {papers,person} from '../data/site.mjs';
+---
+<Base title="Curriculum Vitae" pathname="/cv.html">
+ <Head label="Academic CV" title="Curriculum Vitae" description="공개 가능한 학력, 전문기술교육, 실무, 공동연구 및 연구 성과를 정리한 이력입니다."/>
+ <div class="container">
+   <div class="cv-actions"><button onclick="window.print()" type="button">인쇄 / PDF 저장</button></div>
+   <section class="section" style="padding-top:8px">
+     <h2>윤재성 <span class="muted" style="font-weight:400;font-size:22px">Jaeseong Yun</span></h2>
+     <p class="small">AI Systems · Applied Research · Software Verification · <a href={person.github}>GitHub</a></p>
+     <dl>
+       <div class="edu-row"><dt>Education</dt><dd><p>안동대학교 경제학과 · 2027년 2월 졸업예정</p><p>한국폴리텍대학 서울정수캠퍼스 인공지능 소프트웨어 하이테크 과정 · 1,200시간 수료</p><p>K-Digital Training 빅데이터 분석과정 · 6개월 수료</p></dd></div>
+       <div class="edu-row"><dt>Industry & Research</dt><dd><p>XAIKOREA AI 시스템 개발·실증 업무 참여</p><p>호반건설 관련 온프레미스 회의 인텔리전스 PoC · 2026.06부터 참여</p><p>산업용 비전·LLM 소프트웨어 테스트 및 제조 AI 평가 공동연구</p></dd></div>
+       <div class="edu-row"><dt>Publication</dt><dd>{papers.map(p=><p><b>{p.year} · {p.status}</b> — {p.title}. <span class="small">{p.venue}</span></p>)}</dd></div>
+       <div class="edu-row"><dt>Intellectual Property</dt><dd><p>「엣지 기반 보안형 회의 음성 처리 시스템 및 방법」 특허 출원(2026.10.22) · 공동발명자</p><p>온프레미스 회의 인텔리전스 플랫폼 및 GUI 관련 저작권 · 법인 명의 등록</p></dd></div>
+       <div class="edu-row"><dt>Education & Training</dt><dd><p>NCS 확인강사 자격 · K-DT 강사아카데미 이수</p><p>한국기술교육대학교 능력개발교육원 LLM 활용·개발 전략 과정 수료</p></dd></div>
+     </dl>
+     <p class="small" style="margin-top:25px">최종 업데이트 2026.11 · 논문의 출판 및 심사 상태를 구분하여 기재했습니다.</p>
+   </section>
+ </div>
+</Base>
