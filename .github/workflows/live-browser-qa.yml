@@ -1,0 +1,44 @@
+name: Research site live browser QA
+
+on:
+  push:
+    branches: [feature/astro-academic-20261118]
+    paths:
+      - 'qa/**'
+      - '.github/workflows/live-browser-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-live:
+    name: Chromium desktop and mobile
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout test code
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: npm install --no-audit --no-fund
+        working-directory: qa
+      - name: Install Chromium with dependencies
+        run: npx playwright install --with-deps chromium
+        working-directory: qa
+      - name: Open real deployed site in Chromium
+        run: npm test
+        working-directory: qa
+        env:
+          SITE_BASE_URL: https://lifeismoment.github.io
+      - name: Upload screenshots and audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-site-browser-audit
+          path: qa/qa-artifacts/
+          retention-days: 10
+          if-no-files-found: warn
