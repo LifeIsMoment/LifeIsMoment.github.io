@@ -1,0 +1,15 @@
+import { copyFile,mkdir,readdir,writeFile } from 'node:fs/promises';
+import { resolve,join } from 'node:path';
+const dir=resolve(import.meta.dirname,'..'),root=resolve(dir,'..');
+const source=join(root,'content','notes'),dest=join(dir,'src','content','notes');
+await mkdir(dest,{recursive:true});
+const md=(await readdir(source)).filter(x=>x.endsWith('.md'));
+if(md.length<5) throw Error('Expected existing Markdown research notes');
+for(const file of md) await copyFile(join(source,file),join(dest,file.replace(/\.md$/,'.mdx')));
+await mkdir(join(dir,'public','assets','images'),{recursive:true});
+await mkdir(join(dir,'public','assets','bib'),{recursive:true});
+await copyFile(join(root,'assets','images','jaeseong-profile.webp'),join(dir,'public','assets','images','jaeseong-profile.webp'));
+for(const file of (await readdir(join(root,'assets','bib'))).filter(x=>x.endsWith('.bib')))await copyFile(join(root,'assets','bib',file),join(dir,'public','assets','bib',file));
+await copyFile(join(root,'assets','portfolio-favicon.svg'),join(dir,'public','favicon.svg'));
+await writeFile(join(dir,'public','.nojekyll'),'');
+console.log('Synchronized',md.length,'Markdown research notes');
