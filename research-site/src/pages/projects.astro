@@ -1,0 +1,18 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {projects} from '../data/site.mjs';
+---
+<Base title="Projects" pathname="/projects.html">
+ <Head label="Selected engineering work" title="프로젝트" description="개발과 테스트를 통해 연구 질문을 발견한 산업용 AI·소프트웨어 작업을 소개합니다." />
+ <div class="container">
+  <section class="section" style="padding-top:37px"><div class="link-list">
+   {projects.map(p=><article class="list-item">
+    <div class="category">{p.kind}<br />{p.period}</div>
+    <div><h3>{p.title}</h3><p>{p.summary}</p><p class="small"><b>참여</b> · {p.role}<br /><b>주요 기술</b> · {p.tags.join(' · ')}</p><a href={p.href} target={p.href.startsWith('http')?'_blank':undefined} rel={p.href.startsWith('http')?'noopener noreferrer':undefined}>관련 자료 보기 ↗</a></div>
+   </article>)}
+  </div></section>
+  <div class="notice">프로젝트별 정보는 공개 가능한 범위의 개요입니다. 협력기업의 비공개 자료와 원시 데이터를 임의로 공개하지 않으며, 개인의 기여와 조직의 지식재산권을 구분합니다.</div>
+ </div>
+</Base>

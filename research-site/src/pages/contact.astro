@@ -1,0 +1,15 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {person} from '../data/site.mjs';
+---
+<Base title="Contact" pathname="/contact.html">
+ <Head label="Contact and collaboration" title="연락" description="AI 시스템 실증과 산업용 비전·소프트웨어 검증 관련 연구 교류를 환영합니다." />
+ <div class="container section">
+  <h2>연구·검증 경험을 함께 나누고자 합니다.</h2>
+  <p class="lede">관련 연구나 협업 문의는 공개 GitHub 프로필과 저장소의 연락 창구를 우선 이용해 주시기 바랍니다.</p>
+  <div class="cta-links"><a href={person.github} target="_blank" rel="noopener noreferrer">GitHub 프로필 ↗</a><a href="/open-problems.html">Open Problems ↗</a></div>
+  <div class="notice" style="margin-top:35px">공동연구 원고와 협력기업의 비공개 자료는 사전 동의 없이 배포하지 않습니다.</div>
+ </div>
+</Base>

@@ -1,0 +1,25 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {areas} from '../data/site.mjs';
+---
+<Base title="Research" pathname="/research.html">
+ <Head label="Research areas" title="연구 분야" description="산업용 AI 모델의 성능뿐 아니라 결과의 재현성·무결성·운영 조건까지 함께 검토합니다." />
+ <div class="container">
+ <section class="section" style="padding-top:40px">
+ {areas.map(area=>
+  <article class="list-item" id={'r-'+area.n}>
+   <div class="category">{area.n}<br />{area.english}</div>
+   <div>
+     <h3>{area.name}</h3>
+     <p class="lede">{area.description}</p>
+     <p class="small"><b>연구 접근</b> · {area.method}</p>
+     <div class="cta-links"><a href={area.href}>관련 연구 노트 ↗</a><a href="/publications.html">관련 출판 목록 ↗</a></div>
+   </div>
+  </article>
+ )}
+ </section>
+ <section class="section"><h2>공통 연구 원칙</h2><div class="notice">연구 질문 정의 → 비교 조건 고정 → 실제 실험·테스트 → 실패 사례 보존 → 결과 해석과 적용 한계 명시</div></section>
+ </div>
+</Base>

@@ -1,0 +1,12 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {timeline} from '../data/site.mjs';
+---
+<Base title="Timeline" pathname="/timeline.html">
+ <Head label="Academic and engineering timeline" title="이력" description="AI 기술교육, 산업 프로젝트, 공동연구 및 기술 출판의 주요 경로를 정리했습니다." />
+ <div class="container timeline"><section class="section"><div class="link-list">
+ {timeline.map(([when,title,desc])=><div class="list-item"><div class="category">{when}</div><div><h3>{title}</h3><p>{desc}</p></div></div>)}
+ </div></section><div class="cta-links"><a href="/cv.html">인쇄 가능한 CV ↗</a><a href="/publications.html">논문 목록 ↗</a></div></div>
+</Base>

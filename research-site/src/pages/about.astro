@@ -1,0 +1,31 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+---
+<Base title="About" pathname="/about.html">
+ <Head label="About · Biography" title="소개" description="기술의 실제 적용과 객관적 검증을 함께 중시하는 개발·연구 경험을 쌓아왔습니다." />
+ <div class="container">
+   <section class="section">
+     <p class="section-label">Academic & professional background</p>
+     <h2>연구를 향한 학습 과정</h2>
+     <p class="lede">안동대학교 경제학과에서 데이터 기반 의사결정의 기초를 공부했습니다. 이후 빅데이터 분석과 인공지능 소프트웨어 전문기술교육을 수료하고, 개발 및 산업 현장 PoC를 통해 실제 운영 제약을 경험했습니다.</p>
+     <p>현재는 XAIKOREA에서 AI 시스템 개발과 실증 업무에 참여하며, 김재환 박사와 산업용 이상탐지·제조 AI 평가·소프트웨어 테스트 관련 공동연구를 진행하고 있습니다. 실험 수행과 결과 검증을 중심으로 전문성을 발전시키고 있습니다.</p>
+   </section>
+   <section class="section">
+     <h2>교육과 훈련</h2>
+     <dl>
+       <div class="definition"><dt>학사과정</dt><dd>안동대학교 경제학과 · 2027년 2월 졸업예정</dd></div>
+       <div class="definition"><dt>인공지능 소프트웨어</dt><dd>한국폴리텍대학 서울정수캠퍼스 하이테크 과정 · 1,200시간 수료</dd></div>
+       <div class="definition"><dt>빅데이터 분석</dt><dd>K-Digital Training 빅데이터 분석과정 · 6개월 수료</dd></div>
+       <div class="definition"><dt>교육 역량</dt><dd>NCS 확인강사 자격 · K-DT 강사아카데미 이수</dd></div>
+       <div class="definition"><dt>LLM 전문교육</dt><dd>한국기술교육대학교 능력개발교육원 「거대언어모델(LLM)의 활용 및 개발 전략」 수료</dd></div>
+     </dl>
+   </section>
+   <section class="section">
+     <h2>연구에 대한 태도</h2>
+     <div class="notice">실제 구현 결과를 실험조건과 분리하지 않고 기록하며, 성공 사례뿐 아니라 실패와 한계도 검증 가능한 자료로 남기고자 합니다.</div>
+     <div class="aside-nav"><a href="/cv.html">연구 CV ↗</a><a href="/timeline.html">경력·연구 이력 ↗</a><a href="/publications.html">논문·저서 ↗</a></div>
+   </section>
+ </div>
+</Base>

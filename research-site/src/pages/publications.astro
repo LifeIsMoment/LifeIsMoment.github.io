@@ -1,0 +1,37 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {papers} from '../data/site.mjs';
+const filters=[['all','전체'],['conference','학술대회'],['journal','학술지'],['working','진행 중'],['book','도서']];
+---
+<Base title="Publications" pathname="/publications.html" description="윤재성 공동연구 논문, 기술서 및 진행 중 원고의 서지정보와 연구 상태">
+ <Head label="Publications · Books · Working manuscripts" title="논문·저서" description="발표·게재 결정·진행 중 연구를 구분하고 공동저자, 출처, 연구 상태를 명확하게 표시합니다." />
+ <section class="section container" data-filter-root>
+ <div class="filterbar">
+ {filters.map(([kind,label],i)=><button data-kind-filter={kind} aria-pressed={i===0?'true':'false'}>{label}</button>)}
+ <input type="search" data-search aria-label="논문 검색" placeholder="제목·키워드 검색" />
+ <span class="small" data-total></span>
+ </div>
+ <div>
+ {papers.map(p=>
+  <article class="pub-item" data-kind={p.kind} id={p.id}>
+    <div class="pub-year">{p.year}</div>
+    <div>
+      {p.id==='p-conference'&&<a href="https://kimjaehwan.com/assets/publications/secure-on-premises-meeting-intelligence-first-page.png" target="_blank" rel="noopener noreferrer" aria-label="학술대회 논문 첫 페이지"><img class="thumb" src="https://kimjaehwan.com/assets/publications/secure-on-premises-meeting-intelligence-first-page.png" width="130" height="185" loading="lazy" alt="한국컴퓨터정보학회 발표 논문 첫 페이지" /></a>}
+      <span class="status">{p.status}</span>
+      <h2>{p.title}</h2>
+      <p>{p.english}</p>
+      <div class="authors">{p.authors}</div>
+      <div class="venue">{p.venue}</div>
+      <p>{p.summary}</p>
+      <div class="links">
+        {p.links.map(([label,url])=><a href={url} target={url.startsWith('http')?'_blank':undefined} rel={url.startsWith('http')?'noopener noreferrer':undefined}>{label} ↗</a>)}
+      </div>
+    </div>
+  </article>
+ )}
+ </div>
+ <div class="notice" style="margin-top:35px">학술지의 '게재 가능 결정'은 실제 게재 완료와 구분합니다. Working manuscript는 진행 중인 공동연구 원고이며 공개된 학술지 실적이나 확정된 DOI로 표기하지 않습니다.</div>
+ </section>
+</Base>

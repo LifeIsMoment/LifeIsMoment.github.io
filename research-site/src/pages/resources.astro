@@ -1,0 +1,14 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {resources} from '../data/site.mjs';
+---
+<Base title="Resources" pathname="/resources.html">
+ <Head label="Research resources" title="자료실" description="연구에 사용하는 공개 데이터셋, 참고 구현, 공동연구와 연결된 기술 자료를 정리했습니다." />
+ <div class="container resources"><section class="section"><div class="link-list">
+ {resources.map(r=><article class="list-item">
+  <div class="category">{r.kind}</div><div><h3><a href={r.href} target="_blank" rel="noopener noreferrer">{r.name} ↗</a></h3><p>{r.description}</p></div>
+ </article>)}
+ </div><div class="notice" style="margin-top:30px">외부 데이터와 소프트웨어의 저작권 및 라이선스는 각 원 출처의 규정을 따릅니다.</div></section></div>
+</Base>

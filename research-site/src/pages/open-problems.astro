@@ -1,0 +1,18 @@
+
+---
+import Base from '../layouts/Base.astro';
+import Head from '../components/Head.astro';
+import {questions} from '../data/site.mjs';
+---
+<Base title="Open Problems" pathname="/open-problems.html">
+ <Head label="Open research questions" title="Open Problems" description="현재 해결을 탐색하고 있는 연구 질문입니다. 수행 완료된 성과가 아닌 검증 과제와 접근 방법을 공개합니다." />
+ <div class="container section">
+  <div class="details-list">
+    {questions.map((q,i)=><details id={q.id} open={i===0}>
+      <summary><span class="qid">{q.id}</span>{q.title}</summary>
+      <p class="small">{q.topic}</p><p>{q.method}</p><p><a href={q.href}>관련 연구 노트와 자료 ↗</a></p>
+    </details>)}
+  </div>
+  <div class="notice" style="margin-top:32px">공개 연구 질문은 논문 심사 결과나 실험 완료를 의미하지 않습니다. 연구 방법은 지도교수 및 공동연구자의 검토와 추가 실험에 따라 변경될 수 있습니다.</div>
+ </div>
+</Base>
