@@ -36,3 +36,25 @@
 
 /* Publication media stays within each entry's content column. */
 .pub>div:nth-child(2){min-width:0}.pub .pub-bibtex,.pub .pub-secondary{clear:both}.pub .pub-bibtex{padding-top:8px}
+
+/* Academic fall-back skin: used only while Pages still serves legacy branch files. */
+:root{--bg:#fdfdfc;--surface:#fff;--soft:#f4f6f8;--ink:#1e2935;--muted:#617185;--accent:#31577f;--accent2:#799abd;--line:#dce2e8;--shadow:none}
+:root[data-theme=dark]{--bg:#111821;--surface:#17212d;--soft:#1d2b37;--ink:#eef3f8;--muted:#afbfcc;--accent:#9fc4ee;--accent2:#779fc7;--line:#344658;--shadow:none}
+h1,h2,h3{font-family:Georgia,"Noto Serif KR",serif;letter-spacing:-.035em}
+.section.alt{background:var(--bg)}
+.card,.pub,.panel{border-radius:2px;box-shadow:none}
+.card{background:transparent;border:0;border-top:1px solid var(--line);padding:24px 0}
+.card:hover{border-color:var(--line)}
+.section .grid{gap:24px 38px}
+.kpis{display:none!important}
+.hero .ring,.hero .float{display:none!important}
+.hero-art{min-height:330px}
+.profile-frame{transform:none;border-radius:3px;padding:8px}
+.profile-frame img{border-radius:2px}
+.profile-stage .profile-frame{z-index:1}
+.wordmark{letter-spacing:-.04em}
+.wordmark i{color:var(--accent)}
+.section-number,.eyebrow,.textlink{color:var(--accent)}
+.pub .year{font-family:Georgia,serif}
+.button,.filter,.chip,.toolbtn{border-radius:3px}
+@media(max-width:720px){.hero-art{min-height:250px}.card{padding:17px 0}.section .grid{gap:13px}}
