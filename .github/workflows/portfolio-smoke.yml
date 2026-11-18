@@ -1,0 +1,26 @@
+name: Portfolio smoke checks
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'index.html'
+      - '*.html'
+      - 'assets/css/jy-site.css'
+      - 'assets/js/jy-site.js'
+      - 'scripts/site-smoke.mjs'
+      - '.github/workflows/portfolio-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: node --check assets/js/jy-site.js
+      - name: Theme and page integrity regression
+        run: node scripts/site-smoke.mjs
