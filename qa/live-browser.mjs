@@ -64,6 +64,12 @@ try {
      add('route:'+r.label,Boolean(response&&response.status()<400&&info.mainChars>40),{status:response?.status(),...info});
      add('astro:'+r.label,info.dataSite==='astro-academic',{dataSite:info.dataSite});
      add('overflow:'+r.label,info.scrollWidth<=info.windowWidth+2,{scrollWidth:info.scrollWidth,windowWidth:info.windowWidth});
+     if(r.label==='home'){
+       const lines=await desktop.locator('h1').evaluate(el=>{
+         const style=getComputedStyle(el);return Math.round(el.getBoundingClientRect().height/parseFloat(style.lineHeight));
+       });
+       add('hero line count desktop',lines<=3,{lines});
+     }
      if(['home','publications','notes','cv','open-problems'].includes(r.label)){
        await desktop.screenshot({path:out+'/desktop-'+r.label+'.png',fullPage:true,animations:'disabled'});
      }
@@ -77,7 +83,16 @@ try {
    const working=desktop.locator('[data-kind-filter="working"]');
    await working.click({timeout:10000});
    const visible=await desktop.locator('.pub-item:visible').count();
-   add('publication filter working',visible===3,{visible});
+   const diagnostic=await desktop.evaluate(()=>({
+     all:document.querySelectorAll('.pub-item').length,
+     hidden:document.querySelectorAll('.pub-item[hidden]').length,
+     buttonPressed:document.querySelector('[data-kind-filter="working"]')?.getAttribute('aria-pressed'),
+     displayHidden:[...document.querySelectorAll('.pub-item[hidden]')].map(x=>getComputedStyle(x).display)
+   }));
+   add('publication filter working',visible===3&&diagnostic.hidden===3,{visible,...diagnostic});
+   add('conference media fallback',await desktop.locator('.proceedings-folio').count()===1,{
+     found:await desktop.locator('.proceedings-folio').count()
+   });
  }catch(e){add('publication filter working',false,{error:String(e)})}
  try{
    await desktop.goto(base+'/notes.html',{waitUntil:'domcontentloaded'});
