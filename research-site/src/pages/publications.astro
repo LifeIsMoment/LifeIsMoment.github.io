@@ -18,7 +18,11 @@ const filters=[['all','전체'],['conference','학술대회'],['journal','학술
   <article class="pub-item" data-kind={p.kind} id={p.id}>
     <div class="pub-year">{p.year}</div>
     <div>
-      {p.id==='p-conference'&&<a href="https://kimjaehwan.com/assets/publications/secure-on-premises-meeting-intelligence-first-page.png" target="_blank" rel="noopener noreferrer" aria-label="학술대회 논문 첫 페이지"><img class="thumb" src="https://kimjaehwan.com/assets/publications/secure-on-premises-meeting-intelligence-first-page.png" width="130" height="185" loading="lazy" alt="한국컴퓨터정보학회 발표 논문 첫 페이지" /></a>}
+      {p.id==='p-conference'&&<div class="proceedings-folio" role="img" aria-label="한국컴퓨터정보학회 하계학술대회 논문집 정보">
+        <small>CONFERENCE · 2026</small>
+        <strong>한국컴퓨터정보학회<br />하계학술대회<br />논문집</strong>
+        <em>제34권 제2호</em>
+      </div>}
       <span class="status">{p.status}</span>
       <h2>{p.title}</h2>
       <p>{p.english}</p>

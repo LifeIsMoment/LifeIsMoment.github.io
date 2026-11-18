@@ -11,6 +11,8 @@ for(const p of required.filter(x=>x.endsWith('.html'))){
  assert.ok(html.includes('<title>'),'Missing title '+p);
  assert.ok(!html.includes('document.querySelector(\'[data-theme]\')'),'Unsafe theme JS '+p);
 }
+const sourceCss=readFileSync(resolve(import.meta.dirname,'..','src','styles','global.css'),'utf8');
+assert.ok(sourceCss.includes('[hidden]{display:none!important}'),'Filtering CSS must preserve hidden semantics');
 const home=readFileSync(resolve(root,'index.html'),'utf8');
 assert.ok(home.includes('/assets/images/jaeseong-profile.webp'),'Profile image missing');
 assert.ok(home.includes('href="/publications.html"'),'Navigation missing');
